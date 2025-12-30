@@ -1,0 +1,2798 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة الإلكترونيات - شرح وأسئلة تطبيقية</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--warning-color));
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .creator {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .university {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: var(--light-color);
+            font-style: italic;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+        
+        .tab:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .tab.active {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            background-color: #f8f9fa;
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 100px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+            padding-right: 15px;
+            border-right: 4px solid var(--secondary-color);
+        }
+        
+        .theory-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-right: 4px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theory-summary::before {
+            content: "ℹ";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            opacity: 0.3;
+        }
+        
+        .theory-summary h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding-right: 25px;
+        }
+        
+        .questions-container {
+            margin-top: 30px;
+        }
+        
+        .question {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--light-color);
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .question:hover {
+            border-left-color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .question-type {
+            background-color: var(--light-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .answer {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+            border-right: 3px solid var(--secondary-color);
+        }
+        
+        .answer.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .show-answer-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .show-answer-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .formula {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .highlight {
+            background-color: #fff9e6;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-note {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+                border-bottom: 1px solid #eee;
+                border-left: 3px solid transparent;
+            }
+            
+            .tab.active {
+                border-left: 3px solid var(--secondary-color);
+                border-bottom: 1px solid #eee;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>دورة الإلكترونيات - الجامعه المصرية للتعلم الإلكتروني</h1>
+            <p>شرح نظري وأسئلة تطبيقية شاملة</p>
+            <div class="creator">تم العمل بواسطة القحطاني القديم</div>
+            <div class="creator">تعديل ع يد االهوارى</div>
+            <div class="university">THE EGYPTIAN E-LEARNING UNIVERSITY</div>
+        </header>
+        
+        <div class="nav-tabs">
+            <div class="tab active" data-target="basic-concepts">المفاهيم الأساسية</div>
+            <div class="tab" data-target="material-science">لبوسة المادة</div>
+            <div class="tab" data-target="semiconductors">أشباه الموصلات والثنائيات</div>
+            <div class="tab" data-target="dc-circuits">دوائر التيار المستمر</div>
+            <div class="tab" data-target="ohms-law">قانون أوم والقدرة</div>
+            <div class="tab" data-target="capacitors-inductors">المكثفات والمحاثات</div>
+            <div class="tab" data-target="rectifiers">دوائر التقويم</div>
+            <div class="tab" data-target="network-theorems">نظريات الشبكات</div>
+        </div>
+        
+        <!-- القسم 1: المفاهيم الأساسية -->
+        <section id="basic-concepts" class="content-section active">
+            <h2>المفاهيم الأساسية في الكهرباء والإلكترونيات</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>تتضمن المفاهيم الأساسية: الشحنة الكهربائية، التيار، الجهد، المقاومة، والموصلية. الشحنة الكهربائية هي خاصية للمادة تقاس بالكولوم، والتيار هو معدل تدفق الشحنة يقاس بالأمبير، والجهد هو فرق الجهد الكهربائي بين نقطتين يقاس بالفولت، والمقاومة هي معارضة تدفق التيار تقاس بالأوم.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على المفاهيم الأساسية (1-15)</h3>
+                
+                <!-- السؤال 1 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">1</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما الفرق بين الجهد والتيار؟ وهل يمكن وجود جهد بدون تيار؟</p>
+                        <p><strong>English:</strong> What is the difference between voltage and current? And can there be voltage without current?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> الجهد (فرق الجهد) هو القوة الدافعة التي تسبب تدفق الشحنة الكهربائية، بينما التيار هو تدفق الشحنة نفسها. الجهد يقاس بين نقطتين، بينما التيار يقاس عند نقطة. <strong>نعم</strong>، يمكن وجود جهد بدون تيار (مثل البطارية غير المتصلة بدائرة)، لكن لا يمكن وجود تيار بدون جهد.</p>
+                        <p><strong>Answer (English):</strong> Voltage (potential difference) is the driving force that causes the flow of electric charge, while current is the flow of charge itself. Voltage is measured between two points, while current is measured at a point. <strong>Yes</strong>, there can be voltage without current (like a disconnected battery), but there cannot be current without voltage.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 2 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">2</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> إذا كان تيار قدره 3A يمر في موصل لمدة 5 دقائق، فما مقدار الشحنة الكلية التي مرت؟</p>
+                        <p><strong>English:</strong> If a current of 3A passes through a conductor for 5 minutes, what is the total charge that passed?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> 
+                        <div class="formula">Q = I × t</div>
+                        الزمن بالثواني: 5 دقائق = 5 × 60 = 300 ثانية<br>
+                        Q = 3A × 300s = 900 C<br>
+                        إذن الشحنة الكلية هي 900 كولوم.</p>
+                        <p><strong>Answer (English):</strong> 
+                        <div class="formula">Q = I × t</div>
+                        Time in seconds: 5 minutes = 5 × 60 = 300 seconds<br>
+                        Q = 3A × 300s = 900 C<br>
+                        Therefore, the total charge is 900 Coulombs.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 3 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">3</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما الفرق بين التيار المستمر (DC) والتيار المتردد (AC)؟ اذكر ثلاثة اختلافات.</p>
+                        <p><strong>English:</strong> What is the difference between direct current (DC) and alternating current (AC)? Mention three differences.</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <ol>
+                            <li>التيار المستمر له اتجاه ثابت بينما التيار المتردد يعكس اتجاهه بشكل دوري.</li>
+                            <li>التيار المستمر يمكن الحصول عليه من البطاريات بينما التيار المتردد من المولدات.</li>
+                            <li>التيار المتردد يمكن رفعه أو خفضه باستخدام المحولات بينما المستمر لا يمكن.</li>
+                        </ol>
+                        </p>
+                        <p><strong>Answer (English):</strong>
+                        <ol>
+                            <li>Direct current has a constant direction while alternating current reverses its direction periodically.</li>
+                            <li>Direct current can be obtained from batteries while alternating current from generators.</li>
+                            <li>Alternating current can be raised or lowered using transformers while direct current cannot.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 4 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">4</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> مقاومة كربونية تحتوي على الألوان: بني، أسود، أحمر، ذهبي. ما قيمة المقاومة وتسامحها؟</p>
+                        <p><strong>English:</strong> A carbon resistor has the colors: brown, black, red, gold. What is the resistance value and its tolerance?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> 
+                        بني = 1، أسود = 0، أحمر = 2 (عدد الأصفار)، ذهبي = ±5%<br>
+                        القيمة = 10 × 10² = 1000 Ω = 1 kΩ<br>
+                        التسامح = ±5%<br>
+                        إذن المقاومة 1 كيلو أوم ±5%.</p>
+                        <p><strong>Answer (English):</strong> 
+                        Brown = 1, Black = 0, Red = 2 (number of zeros), Gold = ±5%<br>
+                        Value = 10 × 10² = 1000 Ω = 1 kΩ<br>
+                        Tolerance = ±5%<br>
+                        So the resistance is 1 kΩ ±5%.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 5 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">5</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        إذا كانت موصلية مادة 0.02 S، فما قيمة مقاومتها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">R = 1/G</div>
+                        R = 1 / 0.02 = 50 Ω<br>
+                        إذن المقاومة 50 أوم.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 6 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">6</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي شروط الدائرة الكهربائية المغلقة؟ وما الفرق بين الدائرة المفتوحة والدائرة القصيرة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> شروط الدائرة المغلقة:
+                        <ol>
+                            <li>مصدر جهد (قوة دافعة كهربائية)</li>
+                            <li>مسار مغلق للتيار</li>
+                            <li>مقاومة (للتسخين أو تحديد التيار)</li>
+                        </ol>
+                        الفرق: الدائرة المفتوحة تكون فيها المقاومة لا نهائية ولا يمر تيار، أما الدائرة القصيرة تكون المقاومة صفراً ويمر تيار عالٍ جداً.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 7 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">7</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        بطارية تستهلك 7.2 جول من الطاقة لتحريك 0.6 كولوم من الشحنة. ما جهد البطارية؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">V = W/Q</div>
+                        V = 7.2 J / 0.6 C = 12 V<br>
+                        إذن جهد البطارية 12 فولت.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 8 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">8</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اشرح الفرق بين تيار الإلكترونات والتيار التقليدي.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> تيار الإلكترونات هو حركة الإلكترونات الحرة من القطب السالب إلى الموجب. التيار التقليدي هو افتراض حركة الشحنات الموجبة من القطب الموجب إلى السالب. في التحليل الدوائي، نستخدم التيار التقليدي.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 9 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">9</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ما مقدار الشحنة الممثلة بـ 9200 إلكترون؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> شحنة الإلكترون = -1.602 × 10⁻¹⁹ كولوم<br>
+                        الشحنة الكلية = 9200 × (-1.602 × 10⁻¹⁹) = -1.474 × 10⁻¹⁵ كولوم<br>
+                        إذن الشحنة هي -1.474 × 10⁻¹⁵ كولوم (سالبة لأنها إلكترونات).</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 10 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">10</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما المقصود بـ 1 أمبير من التيار؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 1 أمبير = 1 كولوم/ثانية، أي مرور شحنة مقدارها 1 كولوم عبر نقطة في زمن 1 ثانية، أو ما يعادل 6.25 × 10¹⁸ إلكترون في الثانية.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 11 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">11</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين الموصل والعازل من حيث التركيب الذري والمقاومة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>الموصل</strong> (مثل النحاس): يحتوي على عدد كبير من الإلكترونات الحرة، مقاومته منخفضة.</li>
+                            <li><strong>العازل</strong> (مثل الزجاج): لا يحتوي على إلكترونات حرة تقريباً، مقاومته عالية جداً.</li>
+                        </ul>
+                        في النحاس، يمكن للإلكترونات الحرة التحرك بسهولة تحت تأثير جهد، بينما في العوازل تكون الإلكترونات مرتبطة بشدة بنواتها.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 12 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">12</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محمصة كهربائية تسحب 8A من خط قدرة 120V. ما القدرة المستهلكة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">P = V × I</div>
+                        P = 120V × 8A = 960 W = 0.96 kW<br>
+                        إذن القدرة المستهلكة 960 وات.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 13 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">13</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هو تعريف 1 فولت من فرق الجهد؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 1 فولت هو فرق الجهد بين نقطتين عندما يبذل 1 جول من الطاقة لتحريك 1 كولوم من الشحنة بين هاتين النقطتين.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 14 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">14</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تسخن الأسلاك عند مرور تيار عالٍ فيها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> بسبب المقاومة الداخلية للسلك. عند مرور التيار، تتحول الطاقة الكهربائية إلى طاقة حرارية وفق قانون جول: P = I²R. كلما زاد التيار أو المقاومة، زادت الطاقة الحرارية المتولدة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 15 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">15</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        إذا كانت موصلية مقاومتين 0.1S و 0.4S على التوازي، ما الموصلية الكلية؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">G<sub>T</sub> = G<sub>1</sub> + G<sub>2</sub> (للتوازي)</div>
+                        G<sub>T</sub> = 0.1 + 0.4 = 0.5 S<br>
+                        إذن الموصلية الكلية 0.5 سيمنز.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 2: لبوسة المادة -->
+        <section id="material-science" class="content-section">
+            <h2>لبوسة المادة (Material Science)</h2>
+
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>تشمل لبوسة المادة الخصائص الفيزيائية والكيميائية للمواد المستخدمة في الإلكترونيات. المواد تنقسم إلى موصلات (Conductors) ذات مقاومة منخفضة، وعوازل (Insulators) ذات مقاومة عالية، وأشباه موصلات (Semiconductors) ذات مقاومة متوسطة. الخصائص المهمة تشمل المقاومة، الموصلية، معامل درجة الحرارة، والتركيب الذري. في أشباه الموصلات، يمكن تعديل الخصائص بالتشويب (Doping) لإنتاج مواد n-type أو p-type.</p>
+            </div>
+
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على لبوسة المادة (16-30)</h3>
+
+                <!-- السؤال 16 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">16</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما الفرق بين الموصل والعازل من حيث التركيب الإلكتروني؟</p>
+                        <p><strong>English:</strong> What is the difference between a conductor and an insulator in terms of electronic structure?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> الموصل يحتوي على إلكترونات حرة كثيرة في الطبقة الخارجية، مما يسمح بتدفق التيار بسهولة. العازل له روابط قوية بين الذرات، ولا توجد إلكترونات حرة، مما يمنع تدفق التيار.</p>
+                        <p><strong>Answer (English):</strong> A conductor has many free electrons in its outer shell, allowing current to flow easily. An insulator has strong bonds between atoms with no free electrons, preventing current flow.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 17 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">17</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> مادة لها موصلية 10^6 S/m، احسب مقاومتها لعينة طولها 1m ومساحتها 1mm².</p>
+                        <p><strong>English:</strong> A material has conductivity of 10^6 S/m, calculate its resistance for a sample of length 1m and area 1mm².</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <div class="formula">R = ρ × (L/A) = (1/σ) × (L/A)</div>
+                        ρ = 1/σ = 1/10^6 = 10^-6 Ω·m<br>
+                        A = 1mm² = 10^-6 m²<br>
+                        R = 10^-6 × (1 / 10^-6) = 10^-6 × 10^6 = 1 Ω<br>
+                        إذن المقاومة 1 أوم.</p>
+                        <p><strong>Answer (English):</strong>
+                        <div class="formula">R = ρ × (L/A) = (1/σ) × (L/A)</div>
+                        ρ = 1/σ = 1/10^6 = 10^-6 Ω·m<br>
+                        A = 1mm² = 10^-6 m²<br>
+                        R = 10^-6 × (1 / 10^-6) = 10^-6 × 10^6 = 1 Ω<br>
+                        So the resistance is 1 ohm.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 18 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">18</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما هو معامل درجة الحرارة للمقاومة؟ وكيف يختلف بين المعادن وأشباه الموصلات؟</p>
+                        <p><strong>English:</strong> What is the temperature coefficient of resistance? And how does it differ between metals and semiconductors?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> معامل درجة الحرارة α = (ΔR/R)/ΔT، يقيس تغير المقاومة مع درجة الحرارة. في المعادن موجب وصغير (حوالي 0.004/°C)، مما يزيد المقاومة مع الحرارة. في أشباه الموصلات سالب، مما يقلل المقاومة مع الحرارة.</p>
+                        <p><strong>Answer (English):</strong> The temperature coefficient α = (ΔR/R)/ΔT measures resistance change with temperature. In metals, it's positive and small (~0.004/°C), increasing resistance with heat. In semiconductors, it's negative, decreasing resistance with heat.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 19 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">19</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> لماذا تستخدم النحاس في الأسلاك الكهربائية بدلاً من الفضة رغم أن الفضة أفضل موصلية؟</p>
+                        <p><strong>English:</strong> Why is copper used in electrical wires instead of silver, even though silver has better conductivity?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> الفضة أغلى ثمناً من النحاس، وتتأكس بسهولة أكبر مما يقلل موصليتها. النحاس له موصلية جيدة (حوالي 97% من الفضة) وأرخص وأسهل في التشكيل.</p>
+                        <p><strong>Answer (English):</strong> Silver is more expensive than copper and oxidizes more easily, reducing its conductivity. Copper has good conductivity (~97% of silver), is cheaper, and easier to shape.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 20 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">20</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> مقاومة معدنية 100Ω عند 20°C، معامل درجة الحرارة 0.004/°C. احسب مقاومتها عند 70°C.</p>
+                        <p><strong>English:</strong> A metal resistor is 100Ω at 20°C, temperature coefficient 0.004/°C. Calculate its resistance at 70°C.</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <div class="formula">R₂ = R₁[1 + α(ΔT)]</div>
+                        ΔT = 70 - 20 = 50°C<br>
+                        R₂ = 100[1 + 0.004×50] = 100[1 + 0.2] = 100×1.2 = 120 Ω<br>
+                        إذن المقاومة 120 أوم.</p>
+                        <p><strong>Answer (English):</strong>
+                        <div class="formula">R₂ = R₁[1 + α(ΔT)]</div>
+                        ΔT = 70 - 20 = 50°C<br>
+                        R₂ = 100[1 + 0.004×50] = 100[1 + 0.2] = 100×1.2 = 120 Ω<br>
+                        So the resistance is 120 ohms.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 21 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">21</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما هو الفرق بين أشباه الموصلات الداخلية والخارجية؟</p>
+                        <p><strong>English:</strong> What is the difference between intrinsic and extrinsic semiconductors?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> أشباه الموصلات الداخلية نقية، موصليتها تعتمد على درجة الحرارة فقط. الخارجية مشوبة بذرات مانحة أو مستقبلة، مما يزيد موصليتها ويجعلها من نوع n أو p.</p>
+                        <p><strong>Answer (English):</strong> Intrinsic semiconductors are pure, their conductivity depends only on temperature. Extrinsic are doped with donor or acceptor atoms, increasing conductivity and making them n-type or p-type.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 22 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">22</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> لماذا تُفضل السيليكون على الجرمانيوم في صناعة الترانزستورات الحديثة؟</p>
+                        <p><strong>English:</strong> Why is silicon preferred over germanium in modern transistor manufacturing?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> السيليكون أكثر وفرة وأرخص، له ثبات أكبر في درجات الحرارة العالية، وطبقة أكسيد أفضل (SiO2) للعزل. الجرمانيوم يتأثر بالحرارة أكثر وله تيار تسريب أعلى.</p>
+                        <p><strong>Answer (English):</strong> Silicon is more abundant and cheaper, more stable at high temperatures, and has better oxide layer (SiO2) for insulation. Germanium is more affected by heat and has higher leakage current.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 23 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">23</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> في أشباه موصلات، إذا كانت تركيز الإلكترونات الحرة 10^16 m^-3، احسب موصليتها إذا كانت μ_n = 0.15 m²/V·s.</p>
+                        <p><strong>English:</strong> In semiconductors, if free electron concentration is 10^16 m^-3, calculate conductivity if μ_n = 0.15 m²/V·s.</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <div class="formula">σ = n e μ_n</div>
+                        σ = 10^16 × 1.6×10^-19 × 0.15 = 10^16 × 2.4×10^-20 = 2.4×10^-4 S/m<br>
+                        إذن الموصلية 2.4×10^-4 سيمنز/متر.</p>
+                        <p><strong>Answer (English):</strong>
+                        <div class="formula">σ = n e μ_n</div>
+                        σ = 10^16 × 1.6×10^-19 × 0.15 = 10^16 × 2.4×10^-20 = 2.4×10^-4 S/m<br>
+                        So the conductivity is 2.4×10^-4 S/m.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 24 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">24</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما هو تأثير الشوائب على خصائص أشباه الموصلات؟</p>
+                        <p><strong>English:</strong> What is the effect of impurities on semiconductor properties?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> الشوائب تزيد عدد حاملات الشحنة، مما يزيد الموصلية. الشوائب المانحة (مثل P في Si) تخلق إلكترونات إضافية (n-type). الشوائب المستقبلة (مثل B في Si) تخلق فجوات إضافية (p-type).</p>
+                        <p><strong>Answer (English):</strong> Impurities increase the number of charge carriers, increasing conductivity. Donor impurities (like P in Si) create extra electrons (n-type). Acceptor impurities (like B in Si) create extra holes (p-type).</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 25 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">25</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> كيف تؤثر درجة الحرارة على موصلية أشباه الموصلات مقارنة بالمعادن؟</p>
+                        <p><strong>English:</strong> How does temperature affect semiconductor conductivity compared to metals?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> في أشباه الموصلات، تزيد الموصلية مع درجة الحرارة لأنها تولد المزيد من أزواج الإلكترون-فجوة. في المعادن، تقل الموصلية مع الحرارة بسبب زيادة الاهتزاز الذري الذي يعيق حركة الإلكترونات.</p>
+                        <p><strong>Answer (English):</strong> In semiconductors, conductivity increases with temperature as it generates more electron-hole pairs. In metals, conductivity decreases with heat due to increased atomic vibration that impedes electron movement.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 26 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">26</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> مادة عازلة لها سماحية 4، احسب سعة مكثف صفائح متوازية مساحة 100cm²، مسافة 1mm.</p>
+                        <p><strong>English:</strong> An insulating material has permittivity 4, calculate capacitance of parallel plates capacitor with area 100cm², distance 1mm.</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <div class="formula">C = ε A / d</div>
+                        ε = 4 × 8.85×10^-12 = 3.54×10^-11 F/m<br>
+                        A = 100cm² = 0.01 m²<br>
+                        d = 1mm = 0.001 m<br>
+                        C = 3.54×10^-11 × 0.01 / 0.001 = 3.54×10^-11 × 10 = 3.54×10^-10 F = 354 pF<br>
+                        إذن السعة 354 بيكو فاراد.</p>
+                        <p><strong>Answer (English):</strong>
+                        <div class="formula">C = ε A / d</div>
+                        ε = 4 × 8.85×10^-12 = 3.54×10^-11 F/m<br>
+                        A = 100cm² = 0.01 m²<br>
+                        d = 1mm = 0.001 m<br>
+                        C = 3.54×10^-11 × 0.01 / 0.001 = 3.54×10^-11 × 10 = 3.54×10^-10 F = 354 pF<br>
+                        So the capacitance is 354 pF.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 27 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">27</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما هي الخصائص الميكانيكية المهمة للمواد المستخدمة في الإلكترونيات؟</p>
+                        <p><strong>English:</strong> What are the important mechanical properties for materials used in electronics?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> تشمل المتانة، المرونة، معامل التمدد الحراري، والكثافة. هذه الخصائص مهمة للتصنيع، اللحام، والتجميع. على سبيل المثال، يجب أن تكون المواد مقاومة للكسر والتشقق.</p>
+                        <p><strong>Answer (English):</strong> Include strength, elasticity, thermal expansion coefficient, and density. These are important for manufacturing, soldering, and assembly. For example, materials must be resistant to fracture and cracking.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 28 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">28</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> لماذا تستخدم السبائك في بعض التطبيقات الكهربائية بدلاً من المعادن النقية؟</p>
+                        <p><strong>English:</strong> Why are alloys used in some electrical applications instead of pure metals?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> السبائك توفر خصائص أفضل مثل المتانة، المقاومة للتآكل، أو معامل درجة حرارة أقل. مثال: سبيكة النيكروم للمقاومات الحرارية، أو سبيكة النحاس-الزنك للأسلاك.</p>
+                        <p><strong>Answer (English):</strong> Alloys provide better properties like strength, corrosion resistance, or lower temperature coefficient. Example: Nichrome for heating resistors, or copper-zinc alloy for wires.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 29 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">29</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> سلك نحاسي طوله 100m، قطره 1mm، احسب مقاومته إذا كانت موصلية النحاس 6×10^7 S/m.</p>
+                        <p><strong>English:</strong> A copper wire of length 100m, diameter 1mm, calculate its resistance if copper conductivity is 6×10^7 S/m.</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong>
+                        <div class="formula">R = ρ L / A = (1/σ) L / A</div>
+                        ρ = 1/σ = 1/(6×10^7) = 1.667×10^-8 Ω·m<br>
+                        A = π r² = π (0.5×10^-3)^2 = π × 2.5×10^-7 = 7.854×10^-7 m²<br>
+                        R = 1.667×10^-8 × 100 / 7.854×10^-7 ≈ 1.667×10^-6 / 7.854×10^-7 ≈ 2.12 Ω<br>
+                        إذن المقاومة حوالي 2.12 أوم.</p>
+                        <p><strong>Answer (English):</strong>
+                        <div class="formula">R = ρ L / A = (1/σ) L / A</div>
+                        ρ = 1/σ = 1/(6×10^7) = 1.667×10^-8 Ω·m<br>
+                        A = π r² = π (0.5×10^-3)^2 = π × 2.5×10^-7 = 7.854×10^-7 m²<br>
+                        R = 1.667×10^-8 × 100 / 7.854×10^-7 ≈ 1.667×10^-6 / 7.854×10^-7 ≈ 2.12 Ω<br>
+                        So the resistance is approximately 2.12 ohms.</p>
+                    </div>
+                </div>
+
+                <!-- السؤال 30 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">30</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        <p><strong>العربية:</strong> ما هو الفرق بين المواد المغناطيسية والمغناطيسية؟</p>
+                        <p><strong>English:</strong> What is the difference between magnetic and magnetizable materials?</p>
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة (العربية):</strong> المواد المغناطيسية الدائمة تحتفظ بالمغناطيسية بعد إزالة المجال المغناطيسي (مثل الحديد المغناطيسي). المواد القابلة للمغناطيسية تفقد المغناطيسية عند إزالة المجال (مثل الحديد الناعم في المحاثات).</p>
+                        <p><strong>Answer (English):</strong> Permanent magnetic materials retain magnetism after removing the magnetic field (like magnetic iron). Magnetizable materials lose magnetism when the field is removed (like soft iron in inductors).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- القسم 2: أشباه الموصلات والثنائيات -->
+        <section id="semiconductors" class="content-section">
+            <h2>أشباه الموصلات والثنائيات</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>أشباه الموصلات مواد مثل السيليكون والجرمانيوم ذات موصلية بين الموصلات والعوازل. يمكن زيادة موصليتها بعملية التشويب (Doping) بإضافة شوائب. الثنائي (Diode) يتكون من وصل p-n ويسمح بمرور التيار في اتجاه واحد فقط. هناك أنواع مختلفة: ثنائيات السيليكون (جهد عتبة 0.7V) والجرمانيوم (0.3V).</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على أشباه الموصلات والثنائيات (16-30)</h3>
+                
+                <!-- السؤال 16 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">16</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين أشباه الموصلات الداخلية (Intrinsic) والخارجية (Extrinsic)؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>أشباه الموصلات الداخلية:</strong> نقية (مثل السيليكون النقي)، تحتوي على أزواج إلكترون-فجوة متولدة حرارياً فقط.</li>
+                            <li><strong>أشباه الموصلات الخارجية:</strong> مشوبة بإضافة شوائب لزيادة التوصيلية، وتكون إما من النوع n (شوائب مانحة) أو النوع p (شوائب مستقبلة).</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 17 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">17</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين أشباه الموصلات من النوع n والنوع p؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>النوع n:</strong> مشوب بذرات مانحة (مثل الزرنيخ في السيليكون)، يحتوي على إلكترونات حرة كحاملات أغلبية، والفجوات حاملات أقلية.</li>
+                            <li><strong>النوع p:</strong> مشوب بذرات مستقبلة (مثل البورون في السيليكون)، يحتوي على فجوات كحاملات أغلبية، والإلكترونات حاملات أقلية.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 18 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">18</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اشرح ما يحدث عند تكوين وصلة p-n. ما هو جهد الحاجز (Barrier Potential)؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> عند تكوين وصلة p-n، تنتشر الإلكترونات الحرة من المنطقة n إلى المنطقة p والفجوات من p إلى n. عند حدود الوصلة، تتحد الإلكترونات مع الفجوات مكونة أيونات موجبة في المنطقة n وسالبة في المنطقة p، مما يخلق منطقة استنزاف (Depletion Region) وجهد حاجز يمنع مزيداً من الانتشار. جهد الحاجز للسيليكون ≈ 0.7V وللجرمانيوم ≈ 0.3V.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 19 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">19</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين الثنائي في حالة الانحياز الأمامي والعكسي؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>الانحياز الأمامي:</strong> الجهد الموجب على المنطقة p والسالب على المنطقة n، يقلل عرض منطقة الاستنزاف ويسمح بمرور التيار عندما يتجاوز الجهد جهد الحاجز.</li>
+                            <li><strong>الانحياز العكسي:</strong> الجهد الموجب على المنطقة n والسالب على المنطقة p، يزيد عرض منطقة الاستنزاف ويمنع مرور التيار (عدا تيار التسريب الصغير).</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 20 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">20</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثنائي سيليكون له انخفاض جهد أمامي 1.1V عند تيار 1A. احسب مقاومة الكتلة (Bulk Resistance) r<sub>B</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">r<sub>B</sub> = (V<sub>F</sub> - V<sub>B</sub>) / I<sub>F</sub></div>
+                        جهد الحاجز للسيليكون V<sub>B</sub> = 0.7V<br>
+                        r<sub>B</sub> = (1.1V - 0.7V) / 1A = 0.4Ω<br>
+                        إذن مقاومة الكتلة 0.4 أوم.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 21 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">21</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما المقصود بجهد الانهيار (Breakdown Voltage) في الثنائي؟ وهل من الآمن تشغيل الثنائي في منطقة الانهيار؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> جهد الانهيار هو الجهد العكسي الذي عنده يزداد تيار التسريب بشكل حاد بسبب الانهيار الضربي (Avalanche) أو الانهيار النفقي (Zener). <strong>لا</strong>، لا يجب تشغيل الثنائيات التقويمية في منطقة الانهيار لأنها قد تتلف، إلا الثنائيات الخاصة مثل زينر المصممة للعمل في هذه المنطقة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 22 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">22</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اشرح النماذج الثلاثة لتقريب الثنائي.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ol>
+                            <li><strong>النموذج المثالي:</strong> الثنائي كمفتاح - مغلق في الانحياز الأمامي، مفتوح في العكسي.</li>
+                            <li><strong>نموذج الجهد الثابت:</strong> ثنائي مثالي مع مصدر جهد (0.7V للسيليكون) في السلسلة للانحياز الأمامي.</li>
+                            <li><strong>النموذج الكامل:</strong> يشمل جهد الحاجز ومقاومة الكتلة للانحياز الأمامي، والمقاومة العالية للانحياز العكسي.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 23 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">23</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        إذا كان جهد انهيار الثنائي 50V، فماذا يحدث إذا وصلناه بعكس القطبية بمصدر 60V؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> سيدخل الثنائي في منطقة الانهيار، وسيتدفق تيار عكسي كبير قد يتلف الثنائي إذا لم يكن محمياً بدارة محددة للتيار.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 24 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">24</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثنائي سيليكون في دائرة انحياز أمامي، الجهد عليه 0.75V والتيار 100mA. احسب المقاومة المستمرة (DC Resistance) للثنائي.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">R<sub>DC</sub> = V<sub>F</sub> / I<sub>F</sub></div>
+                        R<sub>DC</sub> = 0.75V / 0.1A = 7.5Ω<br>
+                        إذن المقاومة المستمرة 7.5 أوم.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 25 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">25</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        كيف يتأثر جهد الثنائي الأمامي (V<sub>F</sub>) بدرجة الحرارة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> جهد الثنائي الأمامي ينخفض بزيادة درجة الحرارة. تقريبياً، ينخفض بمقدار 2mV لكل درجة مئوية ارتفاع في الحرارة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 26 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">26</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين حاملات الأغلبية وحاملات الأقلية في أشباه الموصلات؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>حاملات الأغلبية:</strong> الحاملات المسؤولة عن معظم التيار (إلكترونات في النوع n، فجوات في النوع p).</li>
+                            <li><strong>حاملات الأقلية:</strong> الحاملات القليلة العدد (فجوات في النوع n، إلكترونات في النوع p) التي تتولد حرارياً.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 27 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">27</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تزيد موصلية أشباه الموصلات بزيادة درجة الحرارة (عكس المعادن)؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> لأن زيادة الحرارة تولد المزيد من أزواج الإلكترون-فجوة، مما يزيد عدد حاملات الشحنة. في المعادن، تزيد المقاومة بالحرارة بسبب زيادة اهتزاز الذرات الذي يعيق حركة الإلكترونات.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 28 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">28</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثنائي سيليكون عند درجة 25°C جهد أمامي 0.7V. ما جهد الأمامي المتوقع عند 75°C؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        فرق الحرارة = 75 - 25 = 50°C<br>
+                        انخفاض الجهد = 2mV/°C × 50°C = 100mV = 0.1V<br>
+                        جهد الأمامي الجديد = 0.7V - 0.1V = 0.6V<br>
+                        إذن الجهد المتوقع 0.6 فولت.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 29 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">29</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي منطقة الاستنزاف (Depletion Region) في وصلة p-n؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> هي المنطقة حول الوصلة p-n التي استنزفت من حاملات الشحنة الحرة (الإلكترونات والفجوات) بسبب الانتشار، وتحتوي على أيونات مشحونة ثابتة تخلق جهد حاجز.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 30 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">30</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        كيف يمكن التحقق من سلامة الثنائي باستخدام الملتيميتر؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> باستخدام وضع قياس المقاومة أو وضع فحص الثنائي:
+                        <ol>
+                            <li>قياس في الاتجاه الأمامي: يجب أن تظهر قراءة جهد منخفض (0.5-0.8V للسيليكون).</li>
+                            <li>قياس في الاتجاه العكسي: يجب أن تظهر قراءة "OL" (مقاومة عالية جداً).</li>
+                            <li>إذا أظهر كلا الاتجاهين مقاومة منخفضة: الثنائي قصير.</li>
+                            <li>إذا أظهر كلا الاتجاهين مقاومة عالية: الثنائي مفتوح.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 3: دوائر التيار المستمر -->
+        <section id="dc-circuits" class="content-section">
+            <h2>دوائر التيار المستمر (المتسلسلة، المتوازية، المختلطة)</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>الدوائر المتسلسلة: نفس التيار، مجموع الجهود = الجهد الكلي، المقاومة الكلية = مجموع المقاومات. الدوائر المتوازية: نفس الجهد، التيار الكلي = مجموع التيارات، المقاومة المكافئة أقل من أصغر مقاومة. الدوائر المختلطة: تجمع بين التسلسل والتوازي. قانون أوم: V=IR. قانون القدرة: P=VI=I²R=V²/R.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على دوائر التيار المستمر (31-45)</h3>
+                
+                <!-- السؤال 31 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">31</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثلاث مقاومات 5Ω، 10Ω، 15Ω على التسلسل. الجهد الكلي 60V. احسب:
+                        أ) المقاومة الكلية
+                        ب) التيار الكلي
+                        ج) الجهد على كل مقاومة
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> = 5 + 10 + 15 = 30Ω</div>
+                        <div class="formula">ب) I<sub>T</sub> = V<sub>T</sub> / R<sub>T</sub> = 60V / 30Ω = 2A</div>
+                        <div class="formula">ج) V<sub>1</sub> = I × R<sub>1</sub> = 2A × 5Ω = 10V<br>
+                        V<sub>2</sub> = 2A × 10Ω = 20V<br>
+                        V<sub>3</sub> = 2A × 15Ω = 30V</div>
+                        المجموع = 10+20+30 = 60V ✓</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 32 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">32</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مقاومتان 6Ω و 12Ω على التوازي، الجهد عليهما 24V. احسب:
+                        أ) التيار في كل فرع
+                        ب) التيار الكلي
+                        ج) المقاومة المكافئة
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) I<sub>1</sub> = V / R<sub>1</sub> = 24V / 6Ω = 4A<br>
+                        I<sub>2</sub> = V / R<sub>2</sub> = 24V / 12Ω = 2A</div>
+                        <div class="formula">ب) I<sub>T</sub> = I<sub>1</sub> + I<sub>2</sub> = 4A + 2A = 6A</div>
+                        <div class="formula">ج) R<sub>EQ</sub> = V / I<sub>T</sub> = 24V / 6A = 4Ω<br>
+                        أو: 1/R<sub>EQ</sub> = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4 ∴ R<sub>EQ</sub>=4Ω</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 33 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">33</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اذكر قانون كيرشوف للتيار (KCL) وللجهد (KVL).
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>قانون كيرشوف للتيار (KCL):</strong> مجموع التيارات الداخلة إلى عقدة = مجموع التيارات الخارجة منها، أو المجموع الجبري للتيارات عند عقدة = صفر.</li>
+                            <li><strong>قانون كيرشوف للجهد (KVL):</strong> المجموع الجبري للجهود في أي مسار مغلق = صفر، أو مجموع انخفاضات الجهد = مجموع زيادات الجهد.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 34 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">34</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة مختلطة: R<sub>1</sub>=10Ω على التسلسل مع R<sub>2</sub>=20Ω و R<sub>3</sub>=30Ω على التوازي. الجهد الكلي 50V. احسب المقاومة الكلية والتيار الكلي.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أولاً: المقاومة المكافئة للمتوازي:<br>
+                        1/R<sub>23</sub> = 1/20 + 1/30 = 3/60 + 2/60 = 5/60<br>
+                        R<sub>23</sub> = 60/5 = 12Ω</div>
+                        <div class="formula">ثانياً: المقاومة الكلية:<br>
+                        R<sub>T</sub> = R<sub>1</sub> + R<sub>23</sub> = 10Ω + 12Ω = 22Ω</div>
+                        <div class="formula">ثالثاً: التيار الكلي:<br>
+                        I<sub>T</sub> = V<sub>T</sub> / R<sub>T</sub> = 50V / 22Ω ≈ 2.27A</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 35 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">35</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        في دائرة متوازية، المقاومة الأولى 8Ω والتيار فيها 3A، المقاومة الثانية 12Ω. الجهد الكلي 48V. احسب:
+                        أ) التيار في المقاومة الثانية
+                        ب) التيار الكلي
+                        ج) المقاومة المكافئة
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) I<sub>2</sub> = V / R<sub>2</sub> = 48V / 12Ω = 4A</div>
+                        <div class="formula">ب) I<sub>T</sub> = I<sub>1</sub> + I<sub>2</sub> = 3A + 4A = 7A</div>
+                        <div class="formula">ج) R<sub>EQ</sub> = V / I<sub>T</sub> = 48V / 7A ≈ 6.86Ω<br>
+                        أو: 1/R<sub>EQ</sub> = 1/8 + 1/12 = 3/24 + 2/24 = 5/24 ∴ R<sub>EQ</sub>=24/5=4.8Ω؟!<br>
+                        الخطأ: القيم لا تتفق، فإذا كان الجهد 48V على المقاومة 8Ω يجب أن يكون تيارها 6A وليس 3A.<br>
+                        التصحيح: I<sub>1</sub> = V/R<sub>1</sub> = 48/8 = 6A، I<sub>T</sub> = 6+4=10A، R<sub>EQ</sub>=48/10=4.8Ω</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 36 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">36</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين الدائرة المفتوحة والدائرة القصيرة في دوائر التوازي؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>الدائرة المفتوحة في فرع:</strong> لا يمر تيار في ذلك الفرع فقط، ولكن الفروع الأخرى تعمل بشكل طبيعي.</li>
+                            <li><strong>الدائرة القصيرة في فرع:</strong> يمر تيار عالٍ جداً في الفرع القصير، وتصبح المقاومة المكافئة ≈ 0، مما قد يتلف المصدر.</li>
+                            <li><strong>الدائرة المفتوحة في الخط الرئيسي:</strong> ينقطع التيار عن جميع الفروع.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 37 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">37</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة مقسم جهد: R<sub>1</sub>=5kΩ، R<sub>2</sub>=15kΩ على التسلسل، الجهد الداخل 40V. احسب جهد الخرج عند طرفي R<sub>2</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">V<sub>out</sub> = V<sub>in</sub> × [R<sub>2</sub> / (R<sub>1</sub> + R<sub>2</sub>)]</div>
+                        V<sub>out</sub> = 40V × [15kΩ / (5kΩ + 15kΩ)] = 40V × (15/20) = 40V × 0.75 = 30V<br>
+                        إذن جهد الخرج 30 فولت.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 38 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">38</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة مقسم تيار: مقاومتان 6Ω و 3Ω على التوازي، التيار الكلي 9A. احسب تيار كل فرع.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I<sub>1</sub> = I<sub>T</sub> × [R<sub>2</sub> / (R<sub>1</sub> + R<sub>2</sub>)]<br>
+                        I<sub>2</sub> = I<sub>T</sub> × [R<sub>1</sub> / (R<sub>1</sub> + R<sub>2</sub>)]</div>
+                        I<sub>1</sub> = 9A × [3Ω / (6Ω + 3Ω)] = 9A × (3/9) = 9A × 1/3 = 3A<br>
+                        I<sub>2</sub> = 9A × [6Ω / (6Ω + 3Ω)] = 9A × (6/9) = 9A × 2/3 = 6A<br>
+                        أو: I<sub>2</sub> = I<sub>T</sub> - I<sub>1</sub> = 9A - 3A = 6A ✓</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 39 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">39</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تكون المقاومة المكافئة للمقاومات المتوازية دائماً أقل من أصغر مقاومة فردية؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> لأن إضافة مسارات متوازية توفر مسارات إضافية للتيار، مما يزيد التيار الكلي لنفس الجهد، وبما أن R = V/I، فزيادة I تقلل R.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 40 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">40</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثلاث مصابيح 120V، 100W على التسلسل مع مصدر 240V. احسب:
+                        أ) مقاومة كل مصباح
+                        ب) المقاومة الكلية
+                        ج) التيار الكلي
+                        د) القدرة الكلية
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) P = V²/R → R = V²/P<br>
+                        R<sub>لمصباح</sub> = (120V)² / 100W = 14400/100 = 144Ω</div>
+                        <div class="formula">ب) R<sub>T</sub> = 3 × 144Ω = 432Ω</div>
+                        <div class="formula">ج) I<sub>T</sub> = V<sub>T</sub> / R<sub>T</sub> = 240V / 432Ω ≈ 0.556A</div>
+                        <div class="formula">د) P<sub>T</sub> = V<sub>T</sub> × I<sub>T</sub> = 240V × 0.556A ≈ 133.3W<br>
+                        أو: P<sub>T</sub> = I<sub>T</sub>² × R<sub>T</sub> = (0.556)² × 432 ≈ 133.3W</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 41 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">41</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        في دائرة مقسم جهد محملة، إذا وصلنا حمل موازي لجزء من المقسم، كيف يؤثر ذلك على جهد الخرج؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> سيقل جهد الخرج لأن الحمل يقلل المقاومة المكافئة لذلك الجزء من المقسم، مما يغير نسبة المقاومة ويقلل الجهد عند نقطة التوصيل.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 42 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">42</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        في دائرة مختلطة: R<sub>1</sub>=4Ω على التسلسل مع R<sub>2</sub>=6Ω و R<sub>3</sub>=12Ω على التوازي. احسب المقاومة المكافئة.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أولاً: المقاومة المكافئة للمتوازي:<br>
+                        1/R<sub>23</sub> = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4<br>
+                        R<sub>23</sub> = 4Ω</div>
+                        <div class="formula">ثانياً: المقاومة الكلية:<br>
+                        R<sub>T</sub> = R<sub>1</sub> + R<sub>23</sub> = 4Ω + 4Ω = 8Ω</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 43 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">43</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي أهمية نقطة الأرض (Ground) في الدوائر الإلكترونية؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li>نقطة مرجعية للجهود (0V).</li>
+                            <li>مسار عودة للتيار.</li>
+                            <li>حماية من الصدمات الكهربائية.</li>
+                            <li>تقليل التداخل الكهروغناطيسي.</li>
+                            <li>تسهيل القياسات (جميع الجهود تقاس بالنسبة للأرض).</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 44 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">44</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة: R<sub>1</sub>=10Ω و R<sub>2</sub>=20Ω على التسلسل مع R<sub>3</sub>=30Ω على التوازي معهما. الجهد الكلي 60V. احسب التيار في R<sub>3</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أولاً: R<sub>12</sub> = 10Ω + 20Ω = 30Ω</div>
+                        <div class="formula">ثانياً: R<sub>3</sub> موازي لـ R<sub>12</sub> (كل منهما 30Ω):<br>
+                        R<sub>T</sub> = 30Ω / 2 = 15Ω (للتساوي: R<sub>T</sub> = R/n)</div>
+                        <div class="formula">ثالثاً: I<sub>T</sub> = V<sub>T</sub> / R<sub>T</sub> = 60V / 15Ω = 4A</div>
+                        <div class="formula">رابعاً: الجهد على R<sub>3</sub> = الجهد على R<sub>12</sub> = V<sub>T</sub> = 60V (لأنهما على التوازي)<br>
+                        I<sub>3</sub> = V / R<sub>3</sub> = 60V / 30Ω = 2A</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 45 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">45</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        كيف يمكن استخدام قانون كيرشوف للجهد (KVL) للتحقق من حسابات انخفاضات الجهد في دائرة متسلسلة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> مجموع انخفاضات الجهد على جميع المقاومات يجب أن يساوي الجهد الكلي للمصدر. فإذا حسبنا انخفاضات الجهد على R<sub>1</sub>، R<sub>2</sub>، R<sub>3</sub> في دائرة متسلسلة، يجب أن يكون: V<sub>1</sub> + V<sub>2</sub> + V<sub>3</sub> = V<sub>T</sub>. إذا لم يتطابق المجموع، فهناك خطأ في الحسابات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 4: قانون أوم والقدرة -->
+        <section id="ohms-law" class="content-section">
+            <h2>قانون أوم والقدرة الكهربائية</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>قانون أوم: V = I × R، I = V/R، R = V/I. العلاقة خطية بين الجهد والتيار عند ثبات المقاومة. القدرة الكهربائية: P = V × I = I²R = V²/R، تقاس بالوات (W). 1 وات = 1 جول/ثانية. القدرة المستهلكة في المقاومة تتحول إلى حرارة.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على قانون أوم والقدرة (46-60)</h3>
+                
+                <!-- السؤال 46 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">46</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        سخان مقاومته 10Ω موصل بجهد 220V. احسب:
+                        أ) التيار
+                        ب) القدرة المستهلكة
+                        ج) الطاقة المستهلكة في ساعة واحدة
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) I = V / R = 220V / 10Ω = 22A</div>
+                        <div class="formula">ب) P = V × I = 220V × 22A = 4840W = 4.84kW<br>
+                        أو: P = V²/R = (220)²/10 = 48400/10 = 4840W</div>
+                        <div class="formula">ج) الطاقة = القدرة × الزمن<br>
+                        W = P × t = 4.84kW × 1h = 4.84kWh</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 47 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">47</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مصباح 60W، 120V. احسب:
+                        أ) التيار
+                        ب) المقاومة
+                        ج) إذا استخدم المصباح 5 ساعات يومياً، فما الطاقة المستهلكة في شهر (30 يوم)؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) I = P / V = 60W / 120V = 0.5A</div>
+                        <div class="formula">ب) R = V / I = 120V / 0.5A = 240Ω<br>
+                        أو: R = V²/P = (120)²/60 = 14400/60 = 240Ω</div>
+                        <div class="formula">ج) الطاقة اليومية = 60W × 5h = 300Wh = 0.3kWh<br>
+                        الطاقة الشهرية = 0.3kWh/يوم × 30 يوم = 9kWh</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 48 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">48</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مقاومة 25Ω تستهلك 400W. احسب:
+                        أ) التيار
+                        ب) الجهد
+                        ج) إذا زاد الجهد 20%، فما القدرة الجديدة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) P = I²R → I = √(P/R) = √(400/25) = √16 = 4A</div>
+                        <div class="formula">ب) V = I × R = 4A × 25Ω = 100V<br>
+                        أو: V = √(P×R) = √(400×25) = √10000 = 100V</div>
+                        <div class="formula">ج) الجهد الجديد = 100V × 1.2 = 120V<br>
+                        P<sub>جديد</sub> = V²/R = (120)²/25 = 14400/25 = 576W<br>
+                        أو: القدرة تتناسب مع مربع الجهد: P<sub>جديد</sub>/P<sub>قديم</sub> = (V<sub>جديد</sub>/V<sub>قديم</sub>)² = (1.2)² = 1.44<br>
+                        P<sub>جديد</sub> = 400W × 1.44 = 576W</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 49 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">49</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما معنى العلاقة الخطية بين الجهد والتيار في المقاومة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> يعني أن الجهد يتناسب طردياً مع التيار عند ثبات المقاومة. إذا ضاعفنا الجهد، يضاعف التيار. بيانياً، العلاقة بين V و I خط مستقيم يمر بنقطة الأصل، ميله = المقاومة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 50 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">50</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        جهد 1000V على مقاومة 1MΩ. احسب التيار.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I = V / R = 1000V / 1,000,000Ω = 0.001A = 1mA</div>
+                        ملاحظة: جهد عالي مع مقاومة عالية يعطي تيار صغير.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 51 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">51</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        جهد 6V على مقاومة 0.01Ω. احسب التيار.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I = V / R = 6V / 0.01Ω = 600A</div>
+                        ملاحظة: جهد منخفض مع مقاومة منخفضة يعطي تيار عالٍ جداً (دائرة قصيرة).</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 52 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">52</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مصباح سياره 12V، 48W. احسب مقاومة المصباح.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">R = V² / P = (12V)² / 48W = 144 / 48 = 3Ω</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 53 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">53</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محمصة 1200W، 120V. ما التيار المطلوب؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I = P / V = 1200W / 120V = 10A</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 54 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">54</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تسخن المقاومات عند مرور التيار فيها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> بسبب تأثير جول: الطاقة الكهربائية تتحول إلى طاقة حرارية في المقاومة. القدرة الحرارية P = I²R، فكلما زاد التيار أو المقاومة، زادت الطاقة الحرارية المتولدة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 55 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">55</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة: V=50V، I=2A. احسب:
+                        أ) المقاومة
+                        ب) القدرة
+                        ج) الطاقة في 2 دقيقة
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) R = V / I = 50V / 2A = 25Ω</div>
+                        <div class="formula">ب) P = V × I = 50V × 2A = 100W</div>
+                        <div class="formula">ج) الطاقة = P × t = 100W × (2×60)s = 100W × 120s = 12000J = 12kJ</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 56 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">56</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مقاومة 8Ω تستهلك 32W. احسب الجهد عليها.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">P = V²/R → V = √(P×R) = √(32W × 8Ω) = √256 = 16V</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 57 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">57</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        جهد 60V على مقاومة 12kΩ. احسب التيار.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I = V / R = 60V / 12000Ω = 0.005A = 5mA</div>
+                        ملاحظة: V على kΩ → mA، V على MΩ → μA.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 58 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">58</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اشرح كيف يمكن استخدام قانون أوم لحساب المقاومة الداخلية للمصدر.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> بقياس الجهد عند طرفي المصدر بدون حمل (V<sub>OC</sub>)، ثم مع حمل معروف (R<sub>L</sub>) وقياس الجهد (V<sub>L</sub>) والتيار (I). المقاومة الداخلية r = (V<sub>OC</sub> - V<sub>L</sub>) / I.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 59 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">59</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        سخان 1500W يعمل على جهد 220V. إذا انخفض الجهد إلى 200V، فما القدرة الجديدة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">القدرة تتناسب مع مربع الجهد:<br>
+                        P<sub>جديد</sub>/P<sub>قديم</sub> = (V<sub>جديد</sub>/V<sub>قديم</sub>)² = (200/220)² ≈ (0.909)² ≈ 0.826</div>
+                        P<sub>جديد</sub> = 1500W × 0.826 ≈ 1240W<br>
+                        أو: نجد المقاومة أولاً: R = V²/P = (220)²/1500 = 48400/1500 ≈ 32.27Ω<br>
+                        ثم: P<sub>جديد</sub> = V²/R = (200)²/32.27 ≈ 40000/32.27 ≈ 1240W</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 60 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">60</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تُصنع مصابيح 120V لتشغيلها على التوالي مع مصدر 240V؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> لأن الجهد يتوزع على المصابيح المتسلسلة. مصباحان 120V على التسلسل مع 240V يحصل كل منهما على 120V (إذا كانت المقاومات متساوية). إذا وصل مصباح 120V مباشرة إلى 240V، سيمر تيار عالٍ ويتلف.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 5: المكثفات والمحاثات -->
+        <section id="capacitors-inductors" class="content-section">
+            <h2>المكثفات والمحاثات</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>المكثف: يخزن الطاقة في مجال كهربائي، السعة C تقاس بالفاراد (F)، يمنع مرور التيار المستمر ويسمح بالمتغير. شحن المكثف: V<sub>C</sub> = V<sub>S</sub>(1-e<sup>-t/RC</sup>). تفريغ المكثف: V<sub>C</sub> = V<sub>0</sub>e<sup>-t/RC</sup>. المحث: يخزن الطاقة في مجال مغناطيسي، المحاثة L تقاس بالهندري (H)، يقاوم التغير في التيار.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على المكثفات والمحاثات (61-75)</h3>
+                
+                <!-- السؤال 61 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">61</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي السعة الكهربائية (Capacitance)؟ وما العوامل التي تعتمد عليها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> السعة هي قدرة المكثف على تخزين الشحنة، C = Q/V، تقاس بالفاراد. لعازل متوازي الصفائح: C = εA/d، حيث:
+                        <ul>
+                            <li>ε: سماحية العازل</li>
+                            <li>A: مساحة الصفيحة</li>
+                            <li>d: المسافة بين الصفيحتين</li>
+                        </ul>
+                        السعة تزيد بزيادة المساحة وسماحية العازل، وتقل بزيادة المسافة.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 62 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">62</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين المكثف والمحث من حيث الاستجابة للتيار المستمر والمتردد؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>المكثف:</strong> يمنع مرور DC (مقاومة لانهائية)، يسمح بمرور AC (مقاومة سعوية X<sub>C</sub> = 1/(2πfC)).</li>
+                            <li><strong>المحث:</strong> يسمح بمرور DC (مقاومة منخفضة)، يقاوم AC (مقاومة حثية X<sub>L</sub> = 2πfL).</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 63 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">63</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثلاثة مكثفات: 10μF، 20μF، 30μF على التوازي. احسب السعة الكلية.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">C<sub>T</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub> (للتوازي)<br>
+                        C<sub>T</sub> = 10μF + 20μF + 30μF = 60μF</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 64 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">64</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        ثلاثة مكثفات: 6μF، 12μF، 18μF على التسلسل. احسب السعة الكلية.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">1/C<sub>T</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub> (للتسلسل)<br>
+                        1/C<sub>T</sub> = 1/6 + 1/12 + 1/18 = 6/36 + 3/36 + 2/36 = 11/36<br>
+                        C<sub>T</sub> = 36/11 ≈ 3.27μF</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 65 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">65</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        اشرح عملية شحن وتفريغ المكثف.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>الشحن:</strong> عند توصيل المكثف بمصدر جهد، يمر تيار عالٍ أولاً ثم يقل تدريجياً حتى يصبح صفراً عندما يصبح جهد المكثف = جهد المصدر. ثابت الزمن τ = RC.</li>
+                            <li><strong>التفريغ:</strong> عند توصيل المكثف المشحون بمقاومة، يتدفق تيار من المكثف حتى يصبح الجهد صفراً.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 66 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">66</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مكثف 100μF مشحون بجهد 50V. احسب الطاقة المخزنة فيه.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">W = ½CV²<br>
+                        W = ½ × (100×10⁻⁶) × (50)² = 0.5 × 100×10⁻⁶ × 2500<br>
+                        = 125000 × 10⁻⁶ = 0.125J</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 67 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">67</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مكثف 10μF ومقاومة 1kΩ على التسلسل مع مصدر 12V. احسب ثابت الزمن للدائرة.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">τ = R × C<br>
+                        τ = 1000Ω × (10×10⁻⁶)F = 0.01s = 10ms</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 68 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">68</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        في دائرة RC شحن، بعد زمن = τ، ما نسبة الجهد على المكثف إلى جهد المصدر؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">V<sub>C</sub> = V<sub>S</sub>(1 - e<sup>-t/τ</sup>)<br>
+                        عند t = τ: V<sub>C</sub> = V<sub>S</sub>(1 - e<sup>-1</sup>) = V<sub>S</sub>(1 - 0.3679) = 0.6321V<sub>S</sub><br>
+                        النسبة ≈ 63.2%</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 69 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">69</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي المقاومة السعوية (X<sub>C</sub>)؟ وكيف تتغير مع التردد والسعة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">X<sub>C</sub> = 1 / (2πfC)</div>
+                        حيث f التردد، C السعة. X<sub>C</sub> تتناسب عكسياً مع التردد والسعة:
+                        <ul>
+                            <li>تزداد X<sub>C</sub> كلما قل التردد أو السعة.</li>
+                            <li>تقل X<sub>C</sub> كلما زاد التردد أو السعة.</li>
+                        </ul>
+                        للمستمر (f=0)، X<sub>C</sub> = ∞ (يمنع DC).</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 70 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">70</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        مكثف 0.1μF على تردد 1kHz. احسب X<sub>C</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">X<sub>C</sub> = 1 / (2πfC)<br>
+                        = 1 / (2π × 1000 × 0.1×10⁻⁶)<br>
+                        = 1 / (6.2832 × 1000 × 10⁻⁷)<br>
+                        = 1 / (6.2832 × 10⁻⁴)<br>
+                        ≈ 1592Ω ≈ 1.59kΩ</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 71 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">71</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي المحاثة (Inductance)؟ وما العوامل المؤثرة عليها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> المحاثة هي قدرة الملف على توليد قوة دافعة كهربائية عكسية عند تغير التيار، تقاس بالهندري. للملف اللولبي: L = μN²A/l، حيث:
+                        <ul>
+                            <li>μ: النفاذية المغناطيسية للقلب</li>
+                            <li>N: عدد اللفات</li>
+                            <li>A: مساحة المقطع</li>
+                            <li>l: طول الملف</li>
+                        </ul>
+                        المحاثة تزيد بزيادة النفاذية ومساحة المقطع ومربع عدد اللفات، وتقل بزيادة الطول.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 72 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">72</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محثان 10mH و 40mH على التسلسل. احسب المحاثة الكلية (بدون تفاعل).
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">L<sub>T</sub> = L<sub>1</sub> + L<sub>2</sub> (للتسلسل بدون تفاعل)<br>
+                        L<sub>T</sub> = 10mH + 40mH = 50mH</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 73 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">73</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محثان 6mH و 12mH على التوازي. احسب المحاثة الكلية (بدون تفاعل).
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">1/L<sub>T</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> (للتوازي بدون تفاعل)<br>
+                        1/L<sub>T</sub> = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4<br>
+                        L<sub>T</sub> = 4mH</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 74 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">74</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محث 50mH على تردد 10kHz. احسب X<sub>L</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">X<sub>L</sub> = 2πfL<br>
+                        = 2π × 10000 × 50×10⁻³<br>
+                        = 6.2832 × 10000 × 0.05<br>
+                        = 6.2832 × 500 = 3141.6Ω ≈ 3.14kΩ</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 75 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">75</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا تستخدم المكثفات في دوائر التقويم كمرشحات؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> لأنها تخزن الطاقة أثناء قمة الموجهة وتطلقها أثناء الانخفاض، مما يملأ الفراغات ويقلل التموج (Ripple) في جهد الخرج، فيحول التيار النبضي إلى تيار شبه مستمر.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 6: دوائر التقويم -->
+        <section id="rectifiers" class="content-section">
+            <h2>دوائر التقويم (Rectifiers)</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>تقويم نصف الموجة: يستخدم ثنائي واحد، يمرر نصف الدورة فقط، التردد الخرج = تردد الدخل. تقويم موجة كاملة: باستخدام ثنائيين وملف ثانوي بنقطة متوسطة، أو 4 ثنائيات على شكل جسر، تردد الخرج = ضعف تردد الدخل. المرشح السعوي: مكثف موازي للخرج يقلل التموج. PIV للثنائي في نصف الموجة = V<sub>m</sub>، في جسر = V<sub>m</sub>.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على دوائر التقويم (76-85)</h3>
+                
+                <!-- السؤال 76 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">76</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما الفرق بين تقويم نصف الموجة وتقويم موجة كاملة من حيث:
+                        أ) عدد الثنائيات
+                        ب) تردد الخرج
+                        ج) كفاءة التقويم
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li><strong>أ) عدد الثنائيات:</strong> نصف الموجة: 1، موجة كاملة (مركزية): 2، موجة كاملة (جسر): 4.</li>
+                            <li><strong>ب) تردد الخرج:</strong> نصف الموجة: f، موجة كاملة: 2f.</li>
+                            <li><strong>ج) كفاءة التقويم:</strong> نصف الموجة: 40.6%، موجة كاملة: 81.2% (نظرية).</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 77 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">77</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة تقويم نصف موجة، جهد الدخل 220V<sub>rms</sub>، نسبة التحويل 10:1. احسب:
+                        أ) جهد الذروة الثانوي
+                        ب) جهد الخرج DC (بدون مرشح)
+                        ج) PIV للثنائي
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) V<sub>sec(rms)</sub> = 220V / 10 = 22V<sub>rms</sub><br>
+                        V<sub>m</sub> = 22 × √2 ≈ 22 × 1.414 = 31.11V</div>
+                        <div class="formula">ب) V<sub>dc</sub> = V<sub>m</sub> / π ≈ 31.11 / 3.1416 ≈ 9.9V</div>
+                        <div class="formula">ج) PIV = V<sub>m</sub> ≈ 31.11V</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 78 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">78</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة تقويم جسر، جهد الدخل 120V<sub>rms</sub>، نسبة التحويل 5:1. احسب:
+                        أ) جهد الذروة الثانوي
+                        ب) جهد الخرج DC (بدون مرشح)
+                        ج) PIV لكل ثنائي
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) V<sub>sec(rms)</sub> = 120V / 5 = 24V<sub>rms</sub><br>
+                        V<sub>m</sub> = 24 × √2 ≈ 24 × 1.414 = 33.94V</div>
+                        <div class="formula">ب) V<sub>dc</sub> = 2V<sub>m</sub> / π ≈ (2×33.94) / 3.1416 ≈ 67.88/3.1416 ≈ 21.6V</div>
+                        <div class="formula">ج) PIV = V<sub>m</sub> ≈ 33.94V</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 79 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">79</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي أهمية مرشح المكثف في دوائر التقويم؟ وكيف يعمل؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> يقلل التموج (Ripple) في جهد الخرج، لتحويل النبضات إلى جهد شبه مستمر. يعمل بتخزين الشحنة أثناء قمة الموجهة وإطلاقها أثناء انخفاض الجهد، مما يملأ الفراغات بين النبضات.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 80 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">80</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة تقويم نصف موجة مع مرشح سعوي: C=500μF، R<sub>L</sub>=250Ω، جهد الذروة الثانوي 20V، تردد الدخل 50Hz. احسب:
+                        أ) جهد DC التقريبي
+                        ب) تردد التموج
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">أ) V<sub>dc</sub> ≈ V<sub>m</sub> - (V<sub>r</sub>/2) حيث V<sub>r</sub> = I<sub>dc</sub>/(fC)<br>
+                        I<sub>dc</sub> ≈ V<sub>m</sub>/R<sub>L</sub> = 20V/250Ω = 0.08A = 80mA<br>
+                        V<sub>r</sub> = I<sub>dc</sub>/(fC) = 0.08/(50×500×10⁻⁶) = 0.08/0.025 = 3.2V<br>
+                        V<sub>dc</sub> ≈ 20 - (3.2/2) = 20 - 1.6 = 18.4V</div>
+                        <div class="formula">ب) تردد التموج = تردد الدخل = 50Hz (لنصف الموجة)</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 81 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">81</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة تقويم جسر مع مرشح سعوي، جهد الذروة الثانوي 30V، تردد الدخل 60Hz. ما تردد التموج؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">تردد التموج = 2 × تردد الدخل = 2 × 60Hz = 120Hz</div>
+                        لأن تقويم الجسر ينتج نبضات لكل نصف دورة من الدخل.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 82 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">82</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هو PIV (Peak Inverse Voltage)؟ وما أهميته في اختيار الثنائي؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> PIV هو أقصى جهد عكسي يظهر على الثنائي. يجب أن يكون جهد انهيار الثنائي أكبر من PIV المتوقع في الدائرة، وإلا سيدخل الثنائي في منطقة الانهيار وقد يتلف.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 83 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">83</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        لماذا يستخدم تقويم الجسر أكثر من التقويم المركزي في التطبيقات العملية؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> لأن تقويم الجسر لا يحتاج إلى محول بنقطة متوسطة (center-tap)، مما يقلل التكلفة ويبسِّط التصميم. أيضاً، PIV للثنائي في الجسر = V<sub>m</sub> بينما في المركزي = 2V<sub>m</sub>، مما يسمح باستخدام ثنائيات بجهد انهيار أقل.</p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 84 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">84</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        محول نسبة تحويله 4:1، جهد الدخل 220V<sub>rms</sub>. ما جهد الذروة على الخرج؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">V<sub>sec(rms)</sub> = 220V / 4 = 55V<sub>rms</sub><br>
+                        V<sub>m</sub> = 55 × √2 ≈ 55 × 1.414 = 77.77V</div>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 85 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">85</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي أسباب فشل الثنائيات في دوائر التقويم؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ol>
+                            <li>تجاوز PIV مما يسبب الانهيار.</li>
+                            <li>تجاوز التيار الأمامي المقنن.</li>
+                            <li>ارتفاع درجة الحرارة بسبب سوء التبريد.</li>
+                            <li>صدمات ميكانيكية أو اهتزازات.</li>
+                            <li>عيوب تصنيعية.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم 7: نظريات الشبكات -->
+        <section id="network-theorems" class="content-section">
+            <h2>نظريات الشبكات (Network Theorems)</h2>
+            
+            <div class="theory-summary">
+                <h4>ملخص نظري</h4>
+                <p>نظرية التراكب: في دائرة خطية متعددة المصادر، يمكن حساب الاستجابة (جهد أو تيار) بجمع مساهمات كل مصدر على حدة مع إلغاء المصادر الأخرى. نظرية ثيفينين: أي شبكة خطية ذات طرفين يمكن استبدالها بمصدر جهد V<sub>TH</sub> على التسلسل مع مقاومة R<sub>TH</sub>. نظرية نورتون: أي شبكة خطية ذات طرفين يمكن استبدالها بمصدر تيار I<sub>N</sub> على التوازي مع مقاومة R<sub>N</sub>.</p>
+            </div>
+            
+            <div class="questions-container">
+                <h3>أسئلة تطبيقية على نظريات الشبكات (86-100)</h3>
+                
+                <!-- السؤال 86 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">86</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي نظرية التراكب (Superposition Theorem)؟ وما خطوات تطبيقها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> نظرية التراكب: في دائرة خطية متعددة المصادر، يمكن حساب الاستجابة (جهد أو تيار) بجمع مساهمات كل مصدر على حدة.
+                        <strong>خطوات التطبيق:</strong>
+                        <ol>
+                            <li>أبقِ مصدراً واحداً وألغِ المصادر الأخرى:
+                                <ul>
+                                    <li>مصدر جهد: استبدله بدارة قصيرة.</li>
+                                    <li>مصدر تيار: استبدله بدارة مفتوحة.</li>
+                                </ul>
+                            </li>
+                            <li>احسب الاستجابة الناتجة عن هذا المصدر.</li>
+                            <li>كرر للبقية.</li>
+                            <li>اجمع النتائج جبرياً.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 87 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">87</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        دائرة بها مصدر جهد 12V ومصدر تيار 3A، المقاومات: R<sub>1</sub>=4Ω، R<sub>2</sub>=6Ω. استخدم نظرية التراكب لحساب التيار في R<sub>2</sub>.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <strong>الخطوة 1:</strong> مصدر الجهد فقط (مصدر التيار مفتوح)<br>
+                        R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> = 4+6=10Ω<br>
+                        I<sub>1</sub> = V/R<sub>T</sub> = 12/10 = 1.2A (نفس الاتجاه في R<sub>2</sub>)<br>
+                        <strong>الخطوة 2:</strong> مصدر التيار فقط (مصدر الجهد قصير)<br>
+                        R<sub>1</sub> و R<sub>2</sub> على التوازي: R<sub>EQ</sub> = (4×6)/(4+6)=24/10=2.4Ω<br>
+                        الجهد على التوازي: V<sub>p</sub> = I×R<sub>EQ</sub> = 3×2.4 = 7.2V<br>
+                        I<sub>2</sub> في R<sub>2</sub> = V<sub>p</sub>/R<sub>2</sub> = 7.2/6 = 1.2A (عكس اتجاه I<sub>1</sub>)<br>
+                        <strong>الخطوة 3:</strong> الجمع الجبري<br>
+                        I<sub>total</sub> في R<sub>2</sub> = I<sub>1</sub> - I<sub>2</sub> = 1.2A - 1.2A = 0A<br>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 88 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">88</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي نظرية ثيفينين (Thevenin's Theorem)؟ وكيف نجد V<sub>TH</sub> و R<sub>TH</sub>؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> نظرية ثيفينين: أي شبكة خطية ذات طرفين يمكن استبدالها بمصدر جهد V<sub>TH</sub> على التسلسل مع مقاومة R<sub>TH</sub>.
+                        <strong>إيجاد V<sub>TH</sub>:</strong> جهد الدائرة المفتوحة بين الطرفين.
+                        <strong>إيجاد R<sub>TH</sub>:</strong> المقاومة بين الطرفين مع إلغاء جميع المصادر المستقلة:
+                        <ul>
+                            <li>مصدر جهد: استبدله بدارة قصيرة.</li>
+                            <li>مصدر تيار: استبدله بدارة مفتوحة.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 89 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">89</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        أوجد مكافئ ثيفينين للدائرة بين الطرفين a-b:
+                        <br>المقاومات: R<sub>1</sub>=4Ω، R<sub>2</sub>=6Ω، R<sub>3</sub>=3Ω
+                        <br>مصدر جهد: V=20V
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <strong>إيجاد V<sub>TH</sub> (جهد الدائرة المفتوحة بين a-b):</strong><br>
+                        R<sub>2</sub> و R<sub>3</sub> على التوازي: R<sub>23</sub> = (6×3)/(6+3)=18/9=2Ω<br>
+                        R<sub>T</sub> = R<sub>1</sub> + R<sub>23</sub> = 4+2=6Ω<br>
+                        I<sub>T</sub> = V/R<sub>T</sub> = 20/6 ≈ 3.333A<br>
+                        الجهد على R<sub>23</sub>: V<sub>23</sub> = I<sub>T</sub>×R<sub>23</sub> = 3.333×2=6.667V<br>
+                        هذا هو V<sub>TH</sub> لأن R<sub>3</sub> متصل مباشرة بين a-b.<br>
+                        <strong>إيجاد R<sub>TH</sub> (بعد إلغاء مصدر الجهد):</strong><br>
+                        مصدر الجهد يصبح قصيراً.<br>
+                        R<sub>1</sub> و R<sub>2</sub> على التوازي: R<sub>12</sub> = (4×6)/(4+6)=24/10=2.4Ω<br>
+                        R<sub>TH</sub> = R<sub>12</sub> على التسلسل مع R<sub>3</sub>؟ لا، لأن a-b متصلان بطرفي R<sub>3</sub>.<br>
+                        الصحيح: من a-b، R<sub>3</sub> على التوازي مع (R<sub>1</sub> على التسلسل مع R<sub>2</sub> بعد قصير؟)<br>
+                        الحل: R<sub>TH</sub> = R<sub>3</sub> // (R<sub>1</sub> + R<sub>2</sub>) = 3 // (4+6) = 3 // 10 = (3×10)/(3+10)=30/13≈2.308Ω<br>
+                        <strong>مكافئ ثيفينين:</strong> V<sub>TH</sub>=6.667V، R<sub>TH</sub>=2.308Ω
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 90 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">90</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي نظرية نورتون (Norton's Theorem)؟ وما العلاقة بين مكافئ ثيفينين ونورتون؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> نظرية نورتون: أي شبكة خطية ذات طرفين يمكن استبدالها بمصدر تيار I<sub>N</sub> على التوازي مع مقاومة R<sub>N</sub>.
+                        <strong>العلاقة مع ثيفينين:</strong>
+                        <ul>
+                            <li>R<sub>N</sub> = R<sub>TH</sub> (نفس المقاومة)</li>
+                            <li>I<sub>N</sub> = V<sub>TH</sub> / R<sub>TH</sub> (تيار الدائرة القصيرة)</li>
+                            <li>V<sub>TH</sub> = I<sub>N</sub> × R<sub>N</sub></li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 91 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">91</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        الدائرة في السؤال 89، أوجد مكافئ نورتون.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        من السؤال 89: V<sub>TH</sub>=6.667V، R<sub>TH</sub>=2.308Ω<br>
+                        <div class="formula">I<sub>N</sub> = V<sub>TH</sub> / R<sub>TH</sub> = 6.667 / 2.308 ≈ 2.889A</div>
+                        <div class="formula">R<sub>N</sub> = R<sub>TH</sub> = 2.308Ω</div>
+                        <strong>مكافئ نورتون:</strong> مصدر تيار 2.889A على التوازي مع مقاومة 2.308Ω.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 92 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">92</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي تحويلات المصادر (Source Transformations)؟ وما فائدتها؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> تحويلات المصادر: تحويل مصدر جهد على التسلسل مع مقاومة إلى مصدر تيار على التوازي مع نفس المقاومة، أو العكس.
+                        <div class="formula">V = I × R<br>
+                        I = V / R</div>
+                        <strong>الفائدة:</strong> تبسيط الدوائر المعقدة لتسهيل التحليل باستخدام نظريات أخرى.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 93 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">93</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        حول المصدر: 12V على التسلسل مع 4Ω إلى مكافئ مصدر تيار.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <div class="formula">I = V / R = 12V / 4Ω = 3A</div>
+                        <strong>المكافئ:</strong> مصدر تيار 3A على التوازي مع مقاومة 4Ω.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 94 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">94</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هو تحليل العقد (Node-Voltage Analysis)؟ وكيف يتم تطبيقه؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> تحليل العقد: طريقة منهجية لحساب جهود العقد في الدائرة باستخدام KCL.
+                        <strong>خطوات التطبيق:</strong>
+                        <ol>
+                            <li>اختر عقدة مرجعية (عادة الأرض).</li>
+                            <li>عين الجهود المجهولة للعقد الأخرى.</li>
+                            <li>طبق KCL عند كل عقدة مجهولة الجهد.</li>
+                            <li>حل المعادلات الناتجة.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 95 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">95</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        أوجد V<sub>1</sub> و V<sub>2</sub> باستخدام تحليل العقد:
+                        <br>العقدة 1: مصدر تيار 5A إلى العقدة، مقاومتان 2Ω و 4Ω للعقدة المرجعية.
+                        <br>العقدة 2: مقاومة 6Ω للعقدة المرجعية، ومقاومة 4Ω للعقدة 1.
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <strong>عند العقدة 1 (KCL):</strong><br>
+                        5 = (V<sub>1</sub>-0)/2 + (V<sub>1</sub>-V<sub>2</sub>)/4<br>
+                        <strong>عند العقدة 2 (KCL):</strong><br>
+                        0 = (V<sub>2</sub>-V<sub>1</sub>)/4 + (V<sub>2</sub>-0)/6<br>
+                        <strong>بتبسيط المعادلة الأولى:</strong><br>
+                        5 = 0.5V<sub>1</sub> + 0.25(V<sub>1</sub>-V<sub>2</sub>) = 0.75V<sub>1</sub> - 0.25V<sub>2</sub> ... (1)<br>
+                        <strong>بتبسيط المعادلة الثانية:</strong><br>
+                        0 = 0.25(V<sub>2</sub>-V<sub>1</sub>) + V<sub>2</sub>/6 = -0.25V<sub>1</sub> + 0.25V<sub>2</sub> + 0.1667V<sub>2</sub><br>
+                        0 = -0.25V<sub>1</sub> + 0.4167V<sub>2</sub> ... (2)<br>
+                        <strong>من (2):</strong> V<sub>1</sub> = (0.4167/0.25)V<sub>2</sub> = 1.6668V<sub>2</sub><br>
+                        <strong>عوض في (1):</strong> 5 = 0.75(1.6668V<sub>2</sub>) - 0.25V<sub>2</sub> = 1.25V<sub>2</sub> - 0.25V<sub>2</sub> = V<sub>2</sub><br>
+                        ∴ V<sub>2</sub> = 5V، V<sub>1</sub> = 1.6668×5 = 8.334V
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 96 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">96</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هو تحليل المسارات (Mesh Analysis)؟ وكيف يختلف عن تحليل العقد؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> تحليل المسارات: طريقة منهجية لحساب تيارات المسارات المستقلة في الدائرة باستخدام KVL.
+                        <strong>الفرق عن تحليل العقد:</strong>
+                        <ul>
+                            <li>تحليل العقد يستخدم KCL ويجد الجهود.</li>
+                            <li>تحليل المسارات يستخدم KVL ويجد التيارات.</li>
+                            <li>تحليل العقد أنسب للدوائر ذات العقد القليلة.</li>
+                            <li>تحليل المسارات أنسب للدوائر ذات المسارات القليلة.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 97 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">97</div>
+                        <div class="question-type">حسابي</div>
+                    </div>
+                    <div class="question-text">
+                        أوجد تيارات المسارات I<sub>1</sub> و I<sub>2</sub>:
+                        <br>المسار 1: مصدر 10V، مقاومة 2Ω (مشتركة)، مقاومة 3Ω.
+                        <br>المسار 2: مصدر 5V، مقاومة 4Ω، مقاومة 3Ω (مشتركة مع المسار 1).
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <strong>للمسار 1 (KVL):</strong><br>
+                        10 - 2I<sub>1</sub> - 3(I<sub>1</sub>-I<sub>2</sub>) = 0 → 10 - 5I<sub>1</sub> + 3I<sub>2</sub> = 0 ... (1)<br>
+                        <strong>للمسار 2 (KVL):</strong><br>
+                        5 - 4I<sub>2</sub> - 3(I<sub>2</sub>-I<sub>1</sub>) = 0 → 5 + 3I<sub>1</sub> - 7I<sub>2</sub> = 0 ... (2)<br>
+                        <strong>من (1):</strong> 5I<sub>1</sub> = 10 + 3I<sub>2</sub> → I<sub>1</sub> = 2 + 0.6I<sub>2</sub><br>
+                        <strong>عوض في (2):</strong> 5 + 3(2+0.6I<sub>2</sub>) - 7I<sub>2</sub> = 0 → 5+6+1.8I<sub>2</sub>-7I<sub>2</sub>=0<br>
+                        11 - 5.2I<sub>2</sub> = 0 → I<sub>2</sub> = 11/5.2 ≈ 2.115A<br>
+                        I<sub>1</sub> = 2 + 0.6×2.115 = 2 + 1.269 = 3.269A
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 98 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">98</div>
+                        <div class="question-type">مفهومي</div>
+                    </div>
+                    <div class="question-text">
+                        ما هي شروط تطبيق نظرية التراكب؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ol>
+                            <li>الدائرة يجب أن تكون خطية (العلاقة بين الجهد والتيار خطية).</li>
+                            <li>تستخدم للجهود والتيارات فقط، وليس للقدرة (لأن القدرة تتناسب مع مربع الجهد أو التيار).</li>
+                            <li>يمكن تطبيقها على دوائر بها مصادر مستقلة فقط.</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 99 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">99</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        متى نفضل استخدام نظرية ثيفينين على الطرق الأخرى لتحليل الدوائر؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ul>
+                            <li>عندما نهتم بجهد أو تيار حمل متغير (نحسب مرة واحدة ثم نغير R<sub>L</sub> بسهولة).</li>
+                            <li>عندما نريد تبسيط جزء من الدائرة لتحليله بشكل منفصل.</li>
+                            <li>عند تحليل دوائر معقدة ذات طرفين فقط.</li>
+                            <li>عند تصميم دوائر لتتناسب مع حمل معين.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- السؤال 100 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-number">100</div>
+                        <div class="question-type">تطبيقي</div>
+                    </div>
+                    <div class="question-text">
+                        كيف يمكن التحقق من صحة تحليل الدائرة باستخدام أكثر من طريقة؟
+                    </div>
+                    <button class="show-answer-btn">إظهار الإجابة</button>
+                    <div class="answer">
+                        <p><strong>الإجابة:</strong> 
+                        <ol>
+                            <li>استخدم طريقتين مختلفتين (مثلاً: تحليل العقد وتحليل المسارات).</li>
+                            <li>طبق قوانين كيرشوف للتحقق (KCL و KVL).</li>
+                            <li>استخدم المحاكاة بالبرامج مثل Multisim.</li>
+                            <li>تحقق من توازن القدرة: مجموع القدرة المولدة = مجموع القدرة المستهلكة.</li>
+                            <li>اختبر مع قيم متطرفة (مثلاً: R<sub>L</sub> = 0 أو ∞).</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 الجامعة المصرية للتعلم الإلكتروني - كلية تكنولوجيا المعلومات</p>
+            <p>دورة الإلكترونيات - مرجع: Grob's BASIC ELECTRONICS, 13th Edition</p>
+            <div class="footer-note">تم إعداد هذا المحتوى التعليمي بواسطة القحطاني القديم</div>
+             
+            <div class="footer-note">تم تعديل ع يد الهوارى </div>
+        </footer>
+    </div>
+
+    <script>
+        // تبديل الأقسام
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // إزالة النشاط من جميع الألسنة
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // إضافة النشاط للسان المحدد
+                tab.classList.add('active');
+                
+                // إخفاء جميع الأقسام
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // إظهار القسم المحدد
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // إظهار/إخفاء الإجابات
+        document.querySelectorAll('.show-answer-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                if (answer.classList.contains('show')) {
+                    answer.classList.remove('show');
+                    button.textContent = 'إظهار الإجابة';
+                } else {
+                    answer.classList.add('show');
+                    button.textContent = 'إخفاء الإجابة';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</html>
